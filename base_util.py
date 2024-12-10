@@ -89,7 +89,7 @@ def load_browser_driver(BROWSER):
 def twitter_login(paths_dict):
 
     # TODO Probably should not load the run_params etc in muliple locations
-    params = bu.BotParams(paths_dict["secretspath"] + "config.txt")
+    params = bu.BotParams("config.txt")
     driver = bu.load_browser_driver(params.BROWSER)
     driver.get("https://x.com/login")
     print("Loaded login page")

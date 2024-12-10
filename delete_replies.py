@@ -3,7 +3,7 @@ import bot_methods as bm
 
 def delete_replies(paths_dict, MAX_DELETE):
 
-    params = bu.BotParams(paths_dict["secretspath"] + "config.txt")
+    params = bu.BotParams("config.txt")
     delete_cnt = 0
     driver = bu.twitter_login(paths_dict)
     reply_article, driver = bm.find_reply_selenium(driver, params.target_url, params.USERNAME)

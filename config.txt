@@ -1,0 +1,5 @@
+twitter_user TWITTER_USER
+twitter_password TWITTER_PASSWORD
+twitter_email TWITTER_EMAIL
+USERNAME TWITTER_HANDLE
+BROWSER Chrome

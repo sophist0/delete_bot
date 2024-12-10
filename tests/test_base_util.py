@@ -9,7 +9,7 @@ PathsFile = "file_paths.txt"
 
 def test_load_filepaths():
     path_dict = bu.load_filepaths(PathsFile)
-    expected_paths = ["rootpath", "secretspath", "testpath"]
+    expected_paths = ["rootpath", "testpath"]
     assert len(path_dict) == len(expected_paths)
     for val in expected_paths:
         assert val in path_dict
@@ -41,8 +41,7 @@ def test_load_browser_driver():
 
 def test_BotParams():
 
-    paths_dict = bu.load_filepaths(PathsFile)
-    params = bu.BotParams(paths_dict["secretspath"] + "config.txt")
+    params = bu.BotParams("config.txt")
 
     assert params.cred_path is not None
     assert params.twitter_user is not None
