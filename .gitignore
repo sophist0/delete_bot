@@ -1,0 +1,7 @@
+*.swp
+*.png
+*.pyc
+secrets/
+*secrets/
+logs/
+__pycache__/

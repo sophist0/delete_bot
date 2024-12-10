@@ -1,0 +1,3 @@
+rootpath delete_bot/
+secretspath secrets/
+testpath tests/
