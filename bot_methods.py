@@ -102,6 +102,8 @@ def display_text(article_text, age, action):
 
 def delete_loaded_replies(driver, USER, delete_cnt, MAX_DELETE):
     articles = driver.find_elements(by=By.TAG_NAME, value="article")
+
+    UNDO_REPOST = False
     for article in articles:
         poster, article_text, age, you_reposted = parse_x_article_2(article)
 
@@ -122,6 +124,7 @@ def delete_loaded_replies(driver, USER, delete_cnt, MAX_DELETE):
                 aria_label = button.get_attribute("aria-label")
                 driver, TL_UPDATED = undo_repost(driver, button, article, aria_label)
                 if TL_UPDATED:
+                    UNDO_REPOST = True
                     break
 
         if TL_UPDATED:
@@ -129,7 +132,9 @@ def delete_loaded_replies(driver, USER, delete_cnt, MAX_DELETE):
             print("delete_cnt: ", delete_cnt)
             print("-------------------------------------------------------")
 
-        if delete_cnt >= MAX_DELETE:
+        if delete_cnt >= MAX_DELETE or UNDO_REPOST:
+            # undoing a repose does not immediately remove it from a loaded timeline, so try reloading the timeline to avoid stale element errors
+            # the trade off is the reload is slow, probably a better solution out there. TODO: test this!
             break
 
     return delete_cnt
