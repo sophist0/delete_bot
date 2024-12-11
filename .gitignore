@@ -2,4 +2,3 @@
 *.png
 *.pyc
 __pycache__/
-config.txt
