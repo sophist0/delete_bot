@@ -24,14 +24,14 @@ python3 delete_bot.py
 
 ## notes
 
-I doubt this bot will work out of the box. For one the selenium and your browser have to be configured to work together.\
+I doubt this bot will work out of the box. For one the selenium and your browser have to be configured to work together.
 
-What I am saying is I haven't tested this on anything but my machine so it will require some jiggering to get working.\
+What I am saying is I haven't tested this on anything but my machine so it will require some jiggering to get working.
 
-If the load browser test runs you should be good, but if it doesn't then it still might work with Chrome.\
+If the load browser test runs you should be good, but if it doesn't then it still might work with Chrome.
 
-Eventually I'll containerize this bot so it will run out of the box if you have docker.\
+Eventually I'll containerize this bot so it will run out of the box if you have docker.
 
-If you have a basic account you can only view 1000 posts a day so you can't delete more than 1000 posts either.\
+If you have a basic account you can only view 1000 posts a day so you can't delete more than 1000 posts either.
 
-Don't use your computer while this is running. Selenium appears to highjack your mouse and keyboard. Nothing bad happens if you do use your computer except delete_bot may crash.\
+Don't use your computer while this is running. Selenium appears to highjack your mouse and keyboard. Nothing bad happens if you do use your computer except delete_bot may crash.
