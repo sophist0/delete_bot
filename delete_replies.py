@@ -28,5 +28,5 @@ def delete_replies(paths_dict, MAX_DELETE):
 paths_dict = bu.load_filepaths("file_paths.txt")
 
 # Problem with login because it attempts to enter the email as the password I think
-MAX_DELETE = 200
+MAX_DELETE = 20
 delete_replies(paths_dict, MAX_DELETE)
