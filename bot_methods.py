@@ -2,6 +2,8 @@ import time
 
 from selenium.webdriver.common.by import By
 
+import random
+
 import bot_methods as bm
 
 LONG_WAIT = 20
@@ -40,7 +42,12 @@ def find_reply_selenium(driver, target_url, USERNAME):
 
     driver.get(target_url)
     time.sleep(PAGELOAD_WAIT)
-    driver = scroll_down(driver)
+
+    # NOTE: scrolling down appears scroll recent tweets out of the loaded tweets buffer?
+    # so only scroll down sometimes
+    r = random.rand()
+    if r < 0.5:
+        driver = scroll_down(driver)
 
     reply = None
     articles = driver.find_elements(by=By.TAG_NAME, value="article")
