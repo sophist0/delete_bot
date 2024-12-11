@@ -24,8 +24,10 @@ python3 delete_bot.py
 
 ## notes
 
-    - I doubt this bot will work out of the box. For one the selenium and your browser has to be configured to work together.
+    - I doubt this bot will work out of the box. For one the selenium and your browser have to be configured to work together.
 
     - What I am saying is I haven't tested this on anything but my machine so it will require some jiggering to get working.
+
+    - If the load browser test runs you should be good, but if it doesn't then it still might work with Chrome.
 
     - Eventually I'll containerize this bot so it will run out of the box if you have docker.
