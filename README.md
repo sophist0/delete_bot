@@ -31,3 +31,7 @@ python3 delete_bot.py
     - If the load browser test runs you should be good, but if it doesn't then it still might work with Chrome.
 
     - Eventually I'll containerize this bot so it will run out of the box if you have docker.
+
+    - If you have a basic account you can only view 1000 posts a day so you can't delete more than 1000 posts either.
+
+    - Don't use your computer while this is running. Selenium appears to highjack your mouse and keyboard. Nothing bad happesn if you do use your computer except delete_bot may crash.
