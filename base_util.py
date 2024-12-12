@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 
 import base_util as bu
 
-LONG_WAIT = 10
+LONG_WAIT = 20
 SHORT_WAIT = 5
 
 class BotParams:
