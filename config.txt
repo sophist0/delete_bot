@@ -1,5 +1,6 @@
-twitter_user TWITTER_HANDLE
-twitter_password TWITTER_PASSWORD
-twitter_email TWITTER_EMAIL
-USERNAME TWITTER_NAME
+twitter_user X_HANDLE
+twitter_password X_PASSWORD
+twitter_email X_EMAIL
+USERNAME X_NAME
 BROWSER Chrome
+MAX_DELETE 20
