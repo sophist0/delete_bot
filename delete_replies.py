@@ -16,7 +16,7 @@ def delete_replies(paths_dict):
         reply_article, driver = bm.find_reply_selenium(driver, params)
 
     print()
-    print("Replies delete: ", delete_cnt)
+    print("Replies deleted: ", delete_cnt)
     print()
     driver.quit()
 
