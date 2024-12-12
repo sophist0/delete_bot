@@ -1,8 +1,7 @@
 import time
+import random
 
 from selenium.webdriver.common.by import By
-
-import random
 
 import bot_methods as bm
 
@@ -10,7 +9,8 @@ LONG_WAIT = 20
 PAGELOAD_WAIT = 10
 DELETE_WAIT = 1
 
-def parse_x_article_2(article):
+def parse_x_article(article):
+    # SKIPS pinned replies
     try:
         tmp = article.text.split("\n")
     except:
@@ -19,7 +19,6 @@ def parse_x_article_2(article):
     print()
     print(tmp)
 
-    # SKIPS pinned replies
     you_reposted = False
     if (len(tmp) <= 1) or ("you blocked." in tmp[0]):
         poster = ""
@@ -36,37 +35,6 @@ def parse_x_article_2(article):
         age = tmp[3].strip()
         article_text = tmp[4].strip()
     return poster, article_text, age, you_reposted
-
-def find_reply_selenium(driver, target_url, USERNAME):
-    # Assume already logged into X
-
-    driver.get(target_url)
-    time.sleep(PAGELOAD_WAIT)
-
-    # NOTE: scrolling down appears scroll recent tweets out of the loaded tweets buffer?
-    # so only scroll down sometimes
-    r = random.random()
-    if r < 0.5:
-        driver = scroll_down(driver)
-
-    reply = None
-    articles = driver.find_elements(by=By.TAG_NAME, value="article")
-    n_articles = len(articles)
-    for idx in range(n_articles):
-        if idx >= len(articles):
-            break
-
-        # Currently checks the age of the original tweet not the reply. Okay for now?
-        article = articles[idx]
-        poster, article_text, age, you_reposted = bm.parse_x_article_2(article)
-
-        # min age 1 day
-        split_age = age.split()
-        if len(split_age) > 1 and poster == USERNAME:
-            reply = article
-            break
-
-    return reply, driver
 
 def scroll_down(driver):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
@@ -111,14 +79,43 @@ def display_text(article_text, age, action):
     print(article_text)
     print()
 
-def delete_loaded_replies(driver, USER, delete_cnt, MAX_DELETE):
+def find_reply_selenium(driver, params):
+    driver.get(params.target_url)
+    time.sleep(PAGELOAD_WAIT)
+
+    # NOTE: scrolling down appears scroll recent tweets out of the loaded tweets buffer?
+    # so only scroll down only sometimes
+    r = random.random()
+    if r < 0.5:
+        driver = scroll_down(driver)
+
+    reply = None
+    articles = driver.find_elements(by=By.TAG_NAME, value="article")
+    n_articles = len(articles)
+    for idx in range(n_articles):
+        if idx >= len(articles):
+            break
+
+        # Currently checks the age of the original tweet not the reply. Okay for now?
+        article = articles[idx]
+        poster, article_text, age, you_reposted = bm.parse_x_article(article)
+
+        # min age 1 day
+        split_age = age.split()
+        if len(split_age) > 1 and poster == params.USERNAME:
+            reply = article
+            break
+
+    return reply, driver
+
+def delete_loaded_replies(driver, params, delete_cnt):
     articles = driver.find_elements(by=By.TAG_NAME, value="article")
 
     for article in articles:
-        poster, article_text, age, you_reposted = parse_x_article_2(article)
+        poster, article_text, age, you_reposted = parse_x_article(article)
 
         TL_UPDATED = False
-        if poster == USER:
+        if poster == params.USERNAME:
             buttons = article.find_elements(by=By.TAG_NAME, value="button")
             display_text(article_text, age, "deleting reply")
             for button in buttons:
@@ -141,9 +138,7 @@ def delete_loaded_replies(driver, USER, delete_cnt, MAX_DELETE):
             print("delete_cnt: ", delete_cnt)
             print("-------------------------------------------------------")
 
-        if delete_cnt >= MAX_DELETE:
-            # undoing a repose does not immediately remove it from a loaded timeline, so try reloading the timeline to avoid stale element errors
-            # the trade off is the reload is slow, probably a better solution out there. TODO: test this!
+        if delete_cnt >= params.MAX_DELETE:
             break
 
     return delete_cnt

@@ -14,14 +14,18 @@ The point of using Selenium is while it is not as stable as using X's API it is 
 
 In the config.txt file replace the following:
 
-    - TWITTER_HANDLE: whatever follows @ for your user
-    - TWITTER_PASSWORD: the password you user logs into X with
-    - TWITTER_EMAIL: the email connected to your X account
-    - TWITTER_NAME: whatever proceeds the @ for your user
+    - X_HANDLE: whatever follows @ for your user
+    - X_PASSWORD: the password you user logs into X with
+    - X_EMAIL: the email connected to your X account
+    - X_NAME: whatever proceeds the @ for your user
 
 ## run
 
 python3 delete_bot.py
+
+## run tests
+
+python3 -m pytest
 
 ## notes
 

@@ -3,13 +3,12 @@ import time
 
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 import base_util as bu
 
-LONG_WAIT = 10
+LONG_WAIT = 20
 SHORT_WAIT = 5
 
 class BotParams:
@@ -21,6 +20,7 @@ class BotParams:
         self.BROWSER = None
         self.target_url = None
         self.USERNAME = None
+        self.MAX_DELETE = None
         self.update_creds()
 
     def update_creds(self):
@@ -39,6 +39,8 @@ class BotParams:
                     self.BROWSER = val
                 elif key == "USERNAME":
                     self.USERNAME = val
+                elif key == "MAX_DELETE":
+                    self.MAX_DELETE = int(val)
 
             self.target_url = "https://x.com/" + self.twitter_user + "/with_replies"
 
@@ -71,10 +73,8 @@ def load_list(path):
 
 def load_browser_driver(BROWSER):
     if BROWSER == "Firefox":
-        opt = Options()
-        opt.set_preference("profile", '/home/jon/.mozilla/firefox/')
         serv = Service('/snap/bin/firefox.geckodriver')
-        driver = webdriver.Firefox(options=opt, service=serv)
+        driver = webdriver.Firefox(service=serv)
     elif BROWSER == "Chrome":
         options = webdriver.ChromeOptions()
         driver = webdriver.Chrome(options=options)

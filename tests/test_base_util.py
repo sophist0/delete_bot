@@ -40,9 +40,7 @@ def test_load_browser_driver():
     driver_2.quit()
 
 def test_BotParams():
-
     params = bu.BotParams("config.txt")
-
     assert params.cred_path is not None
     assert params.twitter_user is not None
     assert params.twitter_password is not None
@@ -50,3 +48,4 @@ def test_BotParams():
     assert params.BROWSER is not None
     assert params.USERNAME is not None
     assert params.target_url is not None
+    assert params.MAX_DELETE is not None
