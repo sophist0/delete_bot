@@ -2,6 +2,8 @@ import time
 
 from selenium.webdriver.common.by import By
 
+import random
+
 import bot_methods as bm
 
 LONG_WAIT = 20
@@ -9,7 +11,11 @@ PAGELOAD_WAIT = 10
 DELETE_WAIT = 1
 
 def parse_x_article_2(article):
-    tmp = article.text.split("\n")
+    try:
+        tmp = article.text.split("\n")
+    except:
+        tmp = []
+        print("Bad article")
     print()
     print(tmp)
 
@@ -36,7 +42,12 @@ def find_reply_selenium(driver, target_url, USERNAME):
 
     driver.get(target_url)
     time.sleep(PAGELOAD_WAIT)
-    driver = scroll_down(driver)
+
+    # NOTE: scrolling down appears scroll recent tweets out of the loaded tweets buffer?
+    # so only scroll down sometimes
+    r = random.rand()
+    if r < 0.5:
+        driver = scroll_down(driver)
 
     reply = None
     articles = driver.find_elements(by=By.TAG_NAME, value="article")
@@ -102,6 +113,7 @@ def display_text(article_text, age, action):
 
 def delete_loaded_replies(driver, USER, delete_cnt, MAX_DELETE):
     articles = driver.find_elements(by=By.TAG_NAME, value="article")
+
     for article in articles:
         poster, article_text, age, you_reposted = parse_x_article_2(article)
 
@@ -130,6 +142,8 @@ def delete_loaded_replies(driver, USER, delete_cnt, MAX_DELETE):
             print("-------------------------------------------------------")
 
         if delete_cnt >= MAX_DELETE:
+            # undoing a repose does not immediately remove it from a loaded timeline, so try reloading the timeline to avoid stale element errors
+            # the trade off is the reload is slow, probably a better solution out there. TODO: test this!
             break
 
     return delete_cnt

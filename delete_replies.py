@@ -22,9 +22,6 @@ def delete_replies(paths_dict, MAX_DELETE):
 
 #################################################################################
 
-# TODO Fix: dropping down to the reply and then going back to the with_replies page
-# reloads all the reply posts. This is a problem because you can only see 1000 posts a day.
-
 paths_dict = bu.load_filepaths("file_paths.txt")
 
 # Problem with login because it attempts to enter the email as the password I think
