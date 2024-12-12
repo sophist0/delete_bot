@@ -45,7 +45,7 @@ def find_reply_selenium(driver, target_url, USERNAME):
 
     # NOTE: scrolling down appears scroll recent tweets out of the loaded tweets buffer?
     # so only scroll down sometimes
-    r = random.rand()
+    r = random.random()
     if r < 0.5:
         driver = scroll_down(driver)
 
