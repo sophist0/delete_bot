@@ -50,3 +50,4 @@ def test_BotParams():
     assert params.BROWSER is not None
     assert params.USERNAME is not None
     assert params.target_url is not None
+    assert params.MAX_DELETE is not None

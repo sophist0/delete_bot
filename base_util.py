@@ -21,6 +21,7 @@ class BotParams:
         self.BROWSER = None
         self.target_url = None
         self.USERNAME = None
+        self.MAX_DELETE = None
         self.update_creds()
 
     def update_creds(self):
@@ -39,6 +40,8 @@ class BotParams:
                     self.BROWSER = val
                 elif key == "USERNAME":
                     self.USERNAME = val
+                elif key == "MAX_DELETE":
+                    self.MAX_DELETE = int(val)
 
             self.target_url = "https://x.com/" + self.twitter_user + "/with_replies"
 
@@ -72,6 +75,7 @@ def load_list(path):
 def load_browser_driver(BROWSER):
     if BROWSER == "Firefox":
         opt = Options()
+        #TODO remove PC_USER
         opt.set_preference("profile", '/home/jon/.mozilla/firefox/')
         serv = Service('/snap/bin/firefox.geckodriver')
         driver = webdriver.Firefox(options=opt, service=serv)

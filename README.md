@@ -23,6 +23,10 @@ In the config.txt file replace the following:
 
 python3 delete_bot.py
 
+## run tests
+
+python3 -m pytest
+
 ## notes
 
 This bot should work out of the box assuming the requirements are satisfied. But my machine so it will require some jiggering to get working.
