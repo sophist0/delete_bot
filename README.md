@@ -41,4 +41,4 @@ If delete_bot crashes with the following error "selenium.common.exceptions.Stale
     2. A timing issues, Twitter didn't load a web element as fast as the bot expected.
     3. ?!?!?!?!?!
 
-If you develop a fix for these issues please submit a pull request. Perhaps I should update the bot to wait for specific web elements to load, but even that will not solve all occurrences of this crash.
+If you develop a fix for these issues please submit a pull request. Perhaps I should update the bot to wait for specific web elements to load, but even that will not solve all occurrences of this error.
