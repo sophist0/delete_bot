@@ -37,8 +37,8 @@ Don't interact with the browser window Selenium opens. If you do I think it chan
 
 If delete_bot crashes with the following error "selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame" along with a bunch of gibberish it could be a number of things.
 
-    1. You interacted with the browser window opened by Selenium.
-    2. A timing issues, Twitter didn't load a web element as fast as the bot expected.
+    1. You interacted with the browser window opened by Selenium changing the web driver state.
+    2. X changed the web driver state by for instance pushing an ad to the users timeline.
     3. ?!?!?!?!?!
 
 If you develop a fix for these issues please submit a pull request. Perhaps I should update the bot to wait for specific web elements to load, but even that will not solve all occurrences of this error.
