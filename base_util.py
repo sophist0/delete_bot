@@ -74,11 +74,8 @@ def load_list(path):
 
 def load_browser_driver(BROWSER):
     if BROWSER == "Firefox":
-        opt = Options()
-        #TODO remove PC_USER
-        opt.set_preference("profile", '/home/jon/.mozilla/firefox/')
         serv = Service('/snap/bin/firefox.geckodriver')
-        driver = webdriver.Firefox(options=opt, service=serv)
+        driver = webdriver.Firefox(service=serv)
     elif BROWSER == "Chrome":
         options = webdriver.ChromeOptions()
         driver = webdriver.Chrome(options=options)
