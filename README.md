@@ -33,13 +33,12 @@ Eventually I'll containerize this bot so it will run out of the box if you have 
 
 If you have a basic account you can only view 1000 posts a day so you can't delete more than 1000 posts either.
 
-Don't use your computer while this is running. Selenium appears to highjack your mouse and keyboard. Nothing bad happens if you do use your computer except delete_bot may crash.
+Don't interact with the browser window Selenium opens. If you do I think it changes the driver state in ways that are not anticipated by the algorithm.
 
 If delete_bot crashes with the following error "selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame" along with a bunch of gibberish it could be a number of things.
 
-    1. You were using the mouse or keyboard.
+    1. You interacted with the browser window opened by Selenium.
     2. A timing issues, Twitter didn't load a web element as fast as the bot expected.
-    3. Perhaps issue 1 is issue 2, disguised as issue 1?
-    4. ?!?!?!?!?!
+    3. ?!?!?!?!?!
 
-If you develop a fix for this issue please submit a pull request. Perhaps I should update the bot to wait for specific web elements to load, but even that will not solve all occurrences of this crash.
+If you develop a fix for these issues please submit a pull request. Perhaps I should update the bot to wait for specific web elements to load, but even that will not solve all occurrences of this crash.
