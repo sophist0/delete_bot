@@ -27,8 +27,9 @@ class BotParams:
         with open(self.cred_path, "r") as infile:
             for line in infile:
                 sine = line.split()
-                key = sine[0].strip()
-                val = sine[1].strip()
+                key = sine[0]
+                l = len(sine)
+                val = " ".join(sine[1:l])
                 if key == "twitter_user":
                     self.twitter_user = val
                 elif key == "twitter_password":

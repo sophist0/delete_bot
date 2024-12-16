@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import base_util as bu
 import bot_methods as bm
 
@@ -20,9 +22,7 @@ def delete_replies(paths_dict):
     print()
     driver.quit()
 
-#################################################################################
+if __name__ == "__main__":
 
-paths_dict = bu.load_filepaths("file_paths.txt")
-
-# Problem with login because it attempts to enter the email as the password I think
-delete_replies(paths_dict)
+    paths_dict = bu.load_filepaths("file_paths.txt")
+    delete_replies(paths_dict)
