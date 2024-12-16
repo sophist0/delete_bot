@@ -1,6 +1,8 @@
 
 import time
+import logging
 
+from datetime import date
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
@@ -45,33 +47,6 @@ class BotParams:
 
             self.target_url = "https://x.com/" + self.twitter_user + "/with_replies"
 
-def load_filepaths(pathfile):
-    paths = {}
-    with open(pathfile, "r") as infile:
-        rootpath = ""
-        for line in infile:
-            sine = line.split()
-            name = sine[0].strip()
-            if len(sine) == 2:
-                path = sine[1].strip()
-            elif name == "rootpath":
-                path = ""
-            else:
-                path = rootpath + path
-            paths[name] = path
-    return paths
-
-def load_list(path):
-    try:
-        f = open(path, "r")
-        data = f.read()
-        data = data.strip()
-        data = data.split("\n")
-        return data
-    except:
-        print("List file being loaded does not exist.")
-        return []
-
 def load_browser_driver(BROWSER):
     if BROWSER == "Firefox":
         serv = Service('/snap/bin/firefox.geckodriver')
@@ -83,11 +58,24 @@ def load_browser_driver(BROWSER):
         raise Exception("BROWSER arg not defined.")
     return driver
 
+def setup_logging():
+    log_path = "logs/delete_bot_{}.log".format(date.today())
+    logging.basicConfig(
+        filename=log_path,
+        encoding="utf-8",
+        level=logging.INFO,
+        filemode="a",
+        format="{asctime} - {levelname} - {message}",
+        style="{",
+        datefmt="%Y-%m-%d %H:%M",
+    )
+    return log_path
+
 #################################################################################
 # Untested Below
 #################################################################################
 
-def twitter_login(paths_dict):
+def twitter_login():
 
     # TODO Probably should not load the run_params etc in muliple locations
     params = bu.BotParams("config.txt")

@@ -1,29 +1,11 @@
 import selenium
 import pytest
+import logging
+import os
 
 from pathlib import Path
 
 import base_util as bu
-
-PathsFile = "file_paths.txt"
-
-def test_load_filepaths():
-    path_dict = bu.load_filepaths(PathsFile)
-    expected_paths = ["rootpath", "testpath"]
-    assert len(path_dict) == len(expected_paths)
-    for val in expected_paths:
-        assert val in path_dict
-
-def test_load_list():
-    path_dict = bu.load_filepaths(PathsFile)
-    list_path = path_dict["testpath"] + "test_data/test_list.txt"
-    res = bu.load_list(list_path)
-    assert len(res) == 5
-    assert "a" in res
-    assert "b" in res
-    assert "c" in res
-    assert "d" in res
-    assert "e" in res
 
 # Skip test on github for now because it would require running browsers in the github test env
 gecko_driver_path = Path('/snap/bin/firefox.geckodriver')
@@ -49,3 +31,7 @@ def test_BotParams():
     assert params.USERNAME is not None
     assert params.target_url is not None
     assert params.MAX_DELETE is not None
+
+def test_setup_logging():
+    logpath = bu.setup_logging()
+    assert isinstance(logpath, str)

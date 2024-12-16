@@ -1,5 +1,6 @@
 import time
 import random
+import logging
 
 from selenium.webdriver.common.by import By
 
@@ -8,6 +9,8 @@ import bot_methods as bm
 LONG_WAIT = 20
 PAGELOAD_WAIT = 10
 DELETE_WAIT = 1
+
+LOGGER = logging.getLogger(__name__)
 
 def parse_x_article(article):
     # SKIPS pinned replies
@@ -79,14 +82,11 @@ def display_text(article_text, age, action):
     print(article_text)
     print()
 
-def find_reply_selenium(driver, params):
+def find_reply_selenium(driver, params, SCROLL):
     driver.get(params.target_url)
     time.sleep(PAGELOAD_WAIT)
 
-    # NOTE: scrolling down appears scroll recent tweets out of the loaded tweets buffer?
-    # so only scroll down only sometimes
-    r = random.random()
-    if r < 0.5:
+    if SCROLL:
         driver = scroll_down(driver)
 
     reply = None
@@ -137,6 +137,8 @@ def delete_loaded_replies(driver, params, delete_cnt):
             delete_cnt += 1
             print("delete_cnt: ", delete_cnt)
             print("-------------------------------------------------------")
+            LOGGER.info("Deleted: " + str(delete_cnt))
+            LOGGER.info(article_text)
 
         if delete_cnt >= params.MAX_DELETE:
             break
