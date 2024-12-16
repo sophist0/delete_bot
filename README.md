@@ -21,7 +21,7 @@ In the config.txt file replace the following:
 
 ## run
 
-python3 delete_bot.py
+python3 delete_replies.py
 
 ## run tests
 
