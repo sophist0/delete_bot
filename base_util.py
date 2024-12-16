@@ -28,8 +28,8 @@ class BotParams:
             for line in infile:
                 sine = line.split()
                 key = sine[0]
-                l = len(sine)
-                val = " ".join(sine[1:l])
+                num_el = len(sine)
+                val = " ".join(sine[1:num_el])
                 if key == "twitter_user":
                     self.twitter_user = val
                 elif key == "twitter_password":
