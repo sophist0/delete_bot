@@ -3,7 +3,7 @@
 Basic bot that uses Selenium to drive Chrome or Firefox to delete all X replies older than a day.
 The point of using Selenium is while it is not as stable as using X's API it is free!!!!
 
-# requirements
+## requirements
 
     - linux
     - python3
@@ -26,6 +26,15 @@ python3 delete_replies.py
 ## run tests
 
 python3 -m pytest
+
+## run as a container
+
+    1. Checkout the "container" branch
+    2. Check that the value for the CONTAINER key in config.txt is True.
+    3. Build docker image with "docker build -t delete_bot ."
+    4. Run the docker container "docker run delete_bot"
+
+Running the tests in the container is a work in progress, as such this branch is by definition unstable.
 
 ## notes
 
