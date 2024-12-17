@@ -2,5 +2,5 @@ twitter_user X_HANDLE
 twitter_password X_PASSWORD
 twitter_email X_EMAIL
 USERNAME X_NAME
-BROWSER Chrome
+CONTAINERIZE True
 MAX_DELETE 20
