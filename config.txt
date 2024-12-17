@@ -2,5 +2,5 @@ twitter_user X_HANDLE
 twitter_password X_PASSWORD
 twitter_email X_EMAIL
 USERNAME X_NAME
-CONTAINERIZE True
-MAX_DELETE 20
+CONTAINERIZE False
+MAX_DELETE 5
