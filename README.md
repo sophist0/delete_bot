@@ -19,6 +19,13 @@ In the config.txt file replace the following:
     - X_EMAIL: the email connected to your X account
     - X_NAME: whatever proceeds the @ for your user
 
+Set:
+
+    - CONTAINERIZE False
+    - MAX_DELETE n
+
+where n is the maximum number of replies to delete.
+
 ## run
 
 python3 delete_replies.py
