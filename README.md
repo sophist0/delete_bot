@@ -37,9 +37,14 @@ python3 -m pytest
 ## run as a container (on linux)
 
     1. Have docker installed
-    2. Check that the value for the CONTAINER key in config.txt is True.
-    3. In this directory build docker image with "docker build -t delete_bot ."
-    4. Run the docker container "docker run delete_bot"
+    2. Check that the value for the CONTAINER key in config.txt is True
+    3. In this directory build docker image with:
+
+        docker build -t delete_bot .
+
+    4. Run the docker container:
+
+        docker run delete_bot
 
 Running the tests in the container is a work in progress, as such this branch is by definition unstable. The point of containerizing this is that it is OS and system independent. But I yet to test running this in Windows or macOS.
 
