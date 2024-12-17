@@ -19,7 +19,7 @@ class BotParams:
         self.twitter_user = None
         self.twitter_password = None
         self.twitter_email = None
-        self.BROWSER = None
+        self.CONTAINERIZE = None
         self.target_url = None
         self.USERNAME = None
         self.MAX_DELETE = None
@@ -38,8 +38,10 @@ class BotParams:
                     self.twitter_password = val
                 elif key == "twitter_email":
                     self.twitter_email = val
-                elif key == "BROWSER":
-                    self.BROWSER = val
+                elif key == "CONTAINERIZE":
+                    self.CONTAINERIZE = False
+                    if val == "True":
+                        self.CONTAINERIZE = True
                 elif key == "USERNAME":
                     self.USERNAME = val
                 elif key == "MAX_DELETE":
@@ -47,15 +49,17 @@ class BotParams:
 
             self.target_url = "https://x.com/" + self.twitter_user + "/with_replies"
 
-def load_browser_driver(BROWSER):
-    if BROWSER == "Firefox":
-        serv = Service('/snap/bin/firefox.geckodriver')
-        driver = webdriver.Firefox(service=serv)
-    elif BROWSER == "Chrome":
-        options = webdriver.ChromeOptions()
-        driver = webdriver.Chrome(options=options)
-    else:
-        raise Exception("BROWSER arg not defined.")
+def load_browser_driver(params):
+    options = webdriver.ChromeOptions()
+
+    if params.CONTAINERIZE:
+        # these options are to get chrome to run in a container
+        options.add_argument('--headless')
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(options=options)
     return driver
 
 def setup_logging():
@@ -67,8 +71,7 @@ def setup_logging():
         filemode="a",
         format="{asctime} - {levelname} - {message}",
         style="{",
-        datefmt="%Y-%m-%d %H:%M",
-    )
+        datefmt="%Y-%m-%d %H:%M")
     return log_path
 
 #################################################################################
@@ -77,9 +80,14 @@ def setup_logging():
 
 def twitter_login():
 
-    # TODO Probably should not load the run_params etc in muliple locations
+    LOGGER = logging.getLogger(__name__)
+    LOGGER.info("Started logging into Twitter")
+
+    # TODO Probably should not load the run_params etc in multiple locations
     params = bu.BotParams("config.txt")
-    driver = bu.load_browser_driver(params.BROWSER)
+    driver = bu.load_browser_driver(params)
+    LOGGER.info("Loaded browser driver")
+
     driver.get("https://x.com/login")
     print("Loaded login page")
     time.sleep(LONG_WAIT)
@@ -108,4 +116,6 @@ def twitter_login():
     print("Entered password")
 
     time.sleep(SHORT_WAIT)
+    LOGGER.info("Finished logging into Twitter")
+
     return driver

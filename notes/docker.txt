@@ -1,0 +1,11 @@
+List docker containers
+
+    docker ps -a
+
+Build docker image
+
+    docker build -t delete_bot .
+
+Run container
+
+    docker run delete_bot

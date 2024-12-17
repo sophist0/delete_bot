@@ -1,16 +1,16 @@
 So it seems you may be able to keep git from tracking a file without deleting
-it from the remote repo using:
+it from the remote repo using
 
     git update-index --skip-worktree <file_name>
 
-to start tracking it again use:
+to start tracking it again use
 
     git update-index --no-skip-worktree <file_name>
 
-to list all flagged files use:
+to list all flagged files use
 
     git ls-files -v|grep '^S'
 
-this is from:
+this is from
 
     https://compiledsuccessfully.dev/git-skip-worktree/
