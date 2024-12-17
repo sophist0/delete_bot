@@ -8,13 +8,13 @@ import base_util as bu
 PARAMS_FILE = "config.txt"
 
 # Skip test on github for now because it would require running browsers in the github test env
-gecko_driver_path = Path('/usr/bin/google-chrome-stable')
-@pytest.mark.skipif(not gecko_driver_path.is_file(), reason="no geckodriver")
-def test_load_browser_driver():
-    params = bu.BotParams(PARAMS_FILE)
-    driver_2 = bu.load_browser_driver(params)
-    assert isinstance(driver_2, selenium.webdriver.chrome.webdriver.WebDriver)
-    driver_2.quit()
+# chrome_path = Path('/usr/bin/google-chrome-stable')
+# @pytest.mark.skipif(not chrome_path.is_file(), reason="no chrome browser")
+# def test_load_browser_driver():
+#     params = bu.BotParams(PARAMS_FILE)
+#     driver_2 = bu.load_browser_driver(params)
+#     assert isinstance(driver_2, selenium.webdriver.chrome.webdriver.WebDriver)
+#     driver_2.quit()
 
 def test_BotParams():
     params = bu.BotParams(PARAMS_FILE)
