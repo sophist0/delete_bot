@@ -8,14 +8,10 @@ import base_util as bu
 PARAMS_FILE = "config.txt"
 
 # Skip test on github for now because it would require running browsers in the github test env
-chrome_path = Path('/usr/bin/google-chrome-stable')
-@pytest.mark.skipif(not chrome_path.is_file(), reason="no chrome browser")
+gecko_driver_path = Path('/usr/bin/google-chrome-stable')
+@pytest.mark.skipif(not gecko_driver_path.is_file(), reason="no geckodriver")
 def test_load_browser_driver():
     params = bu.BotParams(PARAMS_FILE)
-
-    # On github the tests are run in a container without a display
-    params.CONTAINERIZE = True
-
     driver_2 = bu.load_browser_driver(params)
     assert isinstance(driver_2, selenium.webdriver.chrome.webdriver.WebDriver)
     driver_2.quit()
@@ -28,7 +24,10 @@ def test_BotParams():
     assert params.twitter_email is not None
     assert params.CONTAINERIZE is not None
     assert params.USERNAME is not None
-    assert params.target_url is not None
+    assert params.replies_url is not None
+    assert params.likes_url is not None
+    assert isinstance(params.DELETE_LIKES, bool)
+    assert isinstance(params.DELETE_REPLIES, bool)
     assert params.MAX_DELETE is not None
 
 def test_setup_logging():

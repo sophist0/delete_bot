@@ -1,0 +1,5 @@
+LONG_WAIT = 20
+DELETE_WAIT = 1
+PAGELOAD_WAIT = 10
+
+BASE_URL = "https://x.com/"

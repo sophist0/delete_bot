@@ -11,4 +11,4 @@ ADD bot_methods.py .
 ADD config.txt .
 RUN mkdir logs
 COPY tests .
-CMD ["python", "./delete_replies.py"]
+CMD ["python", "./delete_user_data.py"]

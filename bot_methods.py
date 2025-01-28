@@ -1,16 +1,24 @@
-import time
 import random
+import time
 import logging
 
 from selenium.webdriver.common.by import By
 
 import bot_methods as bm
 
-LONG_WAIT = 20
-PAGELOAD_WAIT = 10
-DELETE_WAIT = 1
+from script_constants import DELETE_WAIT, PAGELOAD_WAIT
+
 
 LOGGER = logging.getLogger(__name__)
+
+
+def get_scroll():
+    SCROLL = False
+    r = random.random()
+    if r < 0.5:
+        SCROLL = True
+    return SCROLL
+
 
 def parse_x_article(article):
     # SKIPS pinned replies
@@ -39,21 +47,27 @@ def parse_x_article(article):
         article_text = tmp[4].strip()
     return poster, article_text, age, you_reposted
 
+
 def scroll_down(driver):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+    # TODO: remove constant waits
     time.sleep(PAGELOAD_WAIT // 2)
     return driver
+
 
 def click_on_text_button(driver, search_context, text):
     delete_button = search_context.find_element(By.XPATH, "//span[text()='" + text + "']")
     driver.execute_script("arguments[0].click();", delete_button)
+    # TODO: remove constant waits
     time.sleep(DELETE_WAIT)
     return driver
+
 
 def delete_reply(driver, button, aria_label):
     DELETED = False
     if aria_label == "More":
         driver.execute_script("arguments[0].click();", button)
+        # TODO: remove constant waits
         time.sleep(DELETE_WAIT)
 
         # hit first delete button
@@ -64,16 +78,27 @@ def delete_reply(driver, button, aria_label):
         DELETED = True
     return driver, DELETED
 
+
+def delete_like(driver, button, aria_label):
+    UNLIKED = False
+    if aria_label and ("Liked" in aria_label):
+        driver.execute_script("arguments[0].click();", button)
+        UNLIKED = True
+    return driver, UNLIKED
+
+
 def undo_repost(driver, button, article, aria_label):
     UNDO = False
     if "Repost" in aria_label:
         driver.execute_script("arguments[0].click();", button)
+        # TODO: remove constant waits
         time.sleep(DELETE_WAIT)
 
         # hit undo repost button
         driver = click_on_text_button(driver, article, "Undo repost")
         UNDO = True
     return driver, UNDO
+
 
 def display_text(article_text, age, action):
     print()
@@ -82,8 +107,10 @@ def display_text(article_text, age, action):
     print(article_text)
     print()
 
+
 def find_reply_selenium(driver, params, SCROLL):
-    driver.get(params.target_url)
+    driver.get(params.replies_url)
+    # TODO: remove constant waits
     time.sleep(PAGELOAD_WAIT)
 
     if SCROLL:
@@ -107,6 +134,7 @@ def find_reply_selenium(driver, params, SCROLL):
             break
 
     return reply, driver
+
 
 def delete_loaded_replies(driver, params, delete_cnt):
     articles = driver.find_elements(by=By.TAG_NAME, value="article")
