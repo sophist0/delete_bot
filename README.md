@@ -8,7 +8,7 @@ The point of using Selenium is while it is not as stable as using X's API it is 
     - linux
     - python3
     - selenium
-    - chrome or firefox (but firefox requires more setup, which I will not cover)
+    - chrome
 
 ## setup
 
