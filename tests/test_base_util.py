@@ -8,7 +8,7 @@ import base_util as bu
 PARAMS_FILE = "config.txt"
 
 
-class Test_Params:
+class Mock_Params:
     def __init__(self):
         # limiting tests to only be run in the container
         # this is so we don't have to detect which env the tests are running in
@@ -21,7 +21,7 @@ chrome_driver_path = Path('/usr/bin/google-chrome-stable')
 @pytest.mark.skipif(not chrome_driver_path.is_file(), reason="no geckodriver")
 def test_load_browser_driver():
 
-    params = Test_Params()
+    params = Mock_Params()
     driver_2 = bu.load_browser_driver(params)
     assert isinstance(driver_2, selenium.webdriver.chrome.webdriver.WebDriver)
     driver_2.quit()
