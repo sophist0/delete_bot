@@ -33,3 +33,6 @@ def test_BotParams():
 def test_setup_logging():
     logpath = bu.setup_logging()
     assert isinstance(logpath, str)
+
+def test_fail():
+    assert False
