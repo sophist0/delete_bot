@@ -8,6 +8,7 @@ RUN pip3 install -r requirements.txt
 ADD delete_user_data.py .
 ADD base_util.py .
 ADD bot_methods.py .
+ADD script_constants.py
 ADD config.txt .
 RUN mkdir logs
 COPY tests .
