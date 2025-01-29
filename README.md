@@ -6,9 +6,6 @@ The point of using Selenium is while it is not as stable as using X's API it is 
 ## requirements
 
     - docker
-    - python3
-    - selenium
-    - chrome
 
 ## setup
 
@@ -45,15 +42,11 @@ docker run -e DOCKER_CMD='python3 -m pytest' delete_bot
 
 ## notes
 
-This bot should work out of the box assuming the requirements are satisfied. But I have only tested it on my machine so it will require some jiggering to get working.
+This bot should work out of the box assuming the requirements are satisfied.
 
-If the load browser test runs you should be good, but if it doesn't then it still might work with Chrome since the test will not run if Firefox in not installed correctly.
+If you have a basic X account you can only view 1000 posts a day so you can't delete more than 1000 posts either.
 
-Eventually I'll containerize this bot so it will run out of the box if you have docker.
-
-If you have a basic account you can only view 1000 posts a day so you can't delete more than 1000 posts either.
-
-Don't interact with the browser window Selenium opens. If you do I think it changes the driver state in ways that are not anticipated by the algorithm.
+If running locally don't interact with the browser window Selenium opens. If you do I think it changes the driver state in ways that are not anticipated by the algorithm.
 
 If delete_bot crashes with the following error "selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame" along with a bunch of gibberish it could be a number of things.
 
