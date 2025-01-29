@@ -5,7 +5,7 @@ The point of using Selenium is while it is not as stable as using X's API it is 
 
 ## requirements
 
-    - linux
+    - docker
     - python3
     - selenium
     - chrome
@@ -27,13 +27,9 @@ The additional parameters in the config file are:
     - MAX_DELETE (INT); Controls the number of replies or likes to delete.
 
 
-## run
+## run locally (whether this works depends on the local env)
 
 python3 delete_user_data.py
-
-## run tests
-
-docker run -e DOCKER_CMD='python3 -m pytest' delete_bot
 
 ## run as a container
 
@@ -41,7 +37,11 @@ docker run -e DOCKER_CMD='python3 -m pytest' delete_bot
     2. Build docker image with "docker build -t delete_bot ."
     3. Run the docker container "docker run -e DOCKER_CMD='python3 delete_user_data.py' delete_bot"
 
-Running the tests in the container is a work in progress, as such this branch is by definition unstable.
+Note: If you update the config.txt you will have to rebuild the docker image.
+
+## run tests
+
+docker run -e DOCKER_CMD='python3 -m pytest' delete_bot
 
 ## notes
 
