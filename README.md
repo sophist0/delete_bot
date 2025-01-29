@@ -1,6 +1,6 @@
 # delete_bot
 
-Basic bot that uses Selenium to drive Chrome or Firefox to delete all X replies older than a day.
+Basic bot that uses Selenium to drive Chrome to delete all X replies older than a day.
 The point of using Selenium is while it is not as stable as using X's API it is free!!!!
 
 ## requirements
