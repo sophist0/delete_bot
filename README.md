@@ -33,13 +33,13 @@ python3 delete_user_data.py
 
 ## run tests
 
-python3 -m pytest
+docker run -e DOCKER_CMD='python3 -m pytest' delete_bot
 
 ## run as a container
 
     1. Check that the value for the CONTAINER key in config.txt is True.
     2. Build docker image with "docker build -t delete_bot ."
-    3. Run the docker container "docker run delete_bot"
+    3. Run the docker container "docker run -e DOCKER_CMD='python3 delete_user_data.py' delete_bot"
 
 Running the tests in the container is a work in progress, as such this branch is by definition unstable.
 

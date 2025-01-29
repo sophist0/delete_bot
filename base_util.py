@@ -70,12 +70,11 @@ class BotParams:
 
 
 def load_browser_driver(params):
-    username = os.getlogin()
     options = webdriver.ChromeOptions()
-    options.add_argument(r"--user-data-dir=/home/" + username + "/")
 
     if params.CONTAINERIZE:
         # these options are to get chrome to run in a container
+        options.add_argument(r"--user-data-dir=/delete_bot/")
         options.add_argument('--headless')
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-gpu")
