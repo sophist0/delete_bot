@@ -45,7 +45,7 @@ Running the tests in the container is a work in progress, as such this branch is
 
 ## notes
 
-This bot should work out of the box assuming the requirements are satisfied. But my machine so it will require some jiggering to get working.
+This bot should work out of the box assuming the requirements are satisfied. But I have only tested it on my machine so it will require some jiggering to get working.
 
 If the load browser test runs you should be good, but if it doesn't then it still might work with Chrome since the test will not run if Firefox in not installed correctly.
 
